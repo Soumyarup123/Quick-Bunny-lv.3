@@ -62,6 +62,9 @@ function setup() {
   obsten.shapeColor="red";
   obseleven.shapeColor="red";
   obstwelve.shapeColor="red";
+  move1.shapeColor="red";
+  move2.shapeColor="red";
+  snakegroup=new Group()
 }
 
 function draw()
@@ -70,11 +73,7 @@ function draw()
   rabbit.addImage(bunny);
   rabbit.scale=(0.2);
   carrot.addImage(cimg);
-  carrot.scale=(0.1);
-  move1.addImage(simg);
-  move1.scale=(0.4);
-  move2.addImage(simg);
-  move2.scale=(0.4);
+  carrot.scale=(0.2);
  rabbit.bounceOff(edges[0]);
  rabbit.bounceOff(edges[1]);
  rabbit.bounceOff(edges[2]);
@@ -103,94 +102,104 @@ function draw()
   {
    rabbit.x=rabbit.x+4;
   }
-
+  generatesnake();
+  for (var i=0;i<(snakegroup).length;i++)
+  {
+    temp=snakegroup.get(i);
+    if (rabbit.isTouching(temp))
+    {
+     rabbit.x=40;
+     rabbit.y=550;
+    }
+  }
   if (rabbit.isTouching (carrot))
   {
+    textSize(20);
+    fill(black)
     text("you win",200,200);
   }
   if (rabbit.isTouching(obsone))
   {
-    text("you lose" , 200,200)
    rabbit.x=40;
    rabbit.y=550;
   }
   if (rabbit.isTouching(obstwo))
   {
-    text("you lose" , 200,200)
    rabbit.x=40;
    rabbit.y=550;
   }
   if (rabbit.isTouching(obsthree))
   {
-    text("you lose" , 200,200)
    rabbit.x=40;
    rabbit.y=550;
   }  
   if (rabbit.isTouching(obsfour))
   {
-    text("you lose" , 200,200)
    rabbit.x=40;
    rabbit.y=550;
   }
   if (rabbit.isTouching(obsfive))
   {
-    text("you lose" , 200,200)
    rabbit.x=40;
    rabbit.y=550;
   }
   if (rabbit.isTouching(obssix))
   {
-    text("you lose" , 200,200)
    rabbit.x=40;
    rabbit.y=550;
   }
   if (rabbit.isTouching(obsseven))
   {
-    text("you lose" , 200,200)
    rabbit.x=40;
    rabbit.y=550;
   }
   if (rabbit.isTouching(obseight))
   {
-    text("you lose" , 200,200)
    rabbit.x=40;
    rabbit.y=550;
   }
   if (rabbit.isTouching(obsnine))
   {
-    text("you lose" , 200,200)
    rabbit.x=40;
    rabbit.y=550;
   }
   if (rabbit.isTouching(obsten))
   {
-    text("you lose" , 200,200)
    rabbit.x=40;
    rabbit.y=550;
   }
   if (rabbit.isTouching(obseleven))
   {
-    text("you lose" , 200,200)
    rabbit.x=40;
    rabbit.y=550;
   }
   if (rabbit.isTouching(obstwelve))
   {
-    text("you lose" , 200,200)
    rabbit.x=40;
    rabbit.y=550;
   }
   if (rabbit.isTouching(move1))
   {
-    text("you lose" , 200,200)
-   rabbit.x=40;
-   rabbit.y=550;
+    rabbit.x=40;
+    rabbit.y=550;
   }
   if (rabbit.isTouching(move2))
   {
-    text("you lose" , 200,200)
-   rabbit.x=40;
-   rabbit.y=550;
+    rabbit.x=40;
+    rabbit.y=550;
   }
   drawSprites();
+}
+
+function generatesnake()
+{
+  if(frameCount%80===0)
+  {
+    var snake=createSprite(500,520,100,10)
+    snake.velocityX=-4;
+    snake.y=Math.round(random(20,580));
+    snake.addImage(simg);
+    snake.scale=random(0.1,0.4);
+    snakegroup.add(snake)
+  }
 }
